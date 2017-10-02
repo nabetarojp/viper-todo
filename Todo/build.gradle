@@ -1,0 +1,35 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.supportLibraryVersion = '25.3.1'
+    ext.assertjAndroidVersion = '1.1.1'
+    ext.okhttpVersion = '3.6.0'
+    ext.retrofitVersion = '2.2.0'
+    ext.ormaVersion = '4.2.3'
+    ext.gradleToolsVersion = '2.3.3'
+    ext.rxJavaVersion = '2.0.8'
+    ext.rxAndroidVersion = '2.0.1'
+    ext.dagger2Version = '2.10'
+    ext.gsonVersion = '2.8.0'
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleToolsVersion"
+        classpath 'com.cookpad.android.licensetools:license-tools-plugin:0.21.1'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.3'
+        classpath 'com.github.gfx.ribbonizer:plugin:1.0.0'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
