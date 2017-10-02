@@ -28,7 +28,7 @@ public class TodoLocalDataSource implements DataSource<Todo> {
 
     @Override
     public void add(List<Todo> items) {
-        ormaDatabase.insertIntoTodo(items)
+
     }
 
     @Override
