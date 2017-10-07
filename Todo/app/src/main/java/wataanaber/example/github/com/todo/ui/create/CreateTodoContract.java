@@ -1,8 +1,10 @@
-package wataanaber.example.github.com.todo.ui.splash;
+package wataanaber.example.github.com.todo.ui.create;
 
 import android.app.Activity;
 
-public interface SplashContract {
+import wataanaber.example.github.com.todo.data.model.Todo;
+
+public interface CreateTodoContract {
 
     interface View {
         void showError(String message);
@@ -10,23 +12,24 @@ public interface SplashContract {
 
     interface Presenter {
         void onResume(); // base
-
         void onPause(); // base
-
-        void openTodoList();
+        void saveTodo(String title, String content);
     }
 
     interface Interactor {
         void startInteraction(InteractorOutput out); // base
-
         void stopInteraction(InteractorOutput out); // base
+
+        void saveTodo(Todo todo);
     }
 
     interface InteractorOutput {
+        void onSave();
+        void onError(Throwable t);
     }
 
     interface Router {
-        void openTodoList(Activity activity);
+        void backToParent(Activity activity);
     }
 
 }

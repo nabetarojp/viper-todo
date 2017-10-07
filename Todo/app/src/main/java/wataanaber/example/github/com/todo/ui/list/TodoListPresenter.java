@@ -3,7 +3,11 @@ package wataanaber.example.github.com.todo.ui.list;
 
 import android.app.Activity;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import wataanaber.example.github.com.todo.data.model.Todo;
 
 public class TodoListPresenter implements TodoListContract.Presenter, TodoListContract.InteractorOutput {
 
@@ -34,6 +38,27 @@ public class TodoListPresenter implements TodoListContract.Presenter, TodoListCo
     @Override
     public void onPause() {
         interactor.stopInteraction(this);
+    }
+
+    @Override
+    public void fetchTodos() {
+        interactor.fetchTodos();
+        view.showProgressBar();
+    }
+
+    @Override
+    public void openCreateTodo() {
+        router.openCreateTodo(activity);
+    }
+
+    @Override
+    public void onFetchTodo(boolean hasData, List<Todo> todos) {
+        if (hasData) {
+            view.showTodos(todos);
+        } else {
+            view.showEmpty();
+        }
+        view.hideProgressBar();
     }
 
     @Override

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="view"
-            type="wataanaber.example.github.com.todo.ui.list.TodoListActivity"/>
+            type="wataanaber.example.github.com.todo.ui.create.CreateTodoActivity"/>
     </data>
 
     <RelativeLayout
@@ -22,6 +22,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                style="@style/ToolbarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/app_name" />
@@ -37,17 +38,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:orientation="vertical"
                 android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/title_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/content_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
             <android.support.design.widget.FloatingActionButton
+                android:onClick="@{view.save}"
                 android:id="@+id/create_button"
                 android:layout_width="wrap_content"
-                android:onClick="@{view.onClickCreate}"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="16dp" />

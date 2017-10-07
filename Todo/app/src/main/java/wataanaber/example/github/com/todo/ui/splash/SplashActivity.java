@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import javax.inject.Inject;
 
@@ -30,8 +31,6 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
         AndroidInjection.inject(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
 
-        binding.toolbar.setTitle(getString(R.string.app_name));
-        setSupportActionBar(binding.toolbar);
 
     }
 
@@ -39,6 +38,8 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+        Snackbar.make(binding.getRoot(), "Hi", Snackbar.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> presenter.openTodoList(), 1000);
     }
 
     @Override
@@ -49,8 +50,6 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
 
     @Override
     public void showError(String message) {
-        binding.progressBar.setVisibility(View.GONE);
-        binding.errorText.setVisibility(View.VISIBLE);
-        binding.errorText.setText(message);
+        Snackbar.make(binding.getRoot(), "Hi", Snackbar.LENGTH_SHORT).show();
     }
 }

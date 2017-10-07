@@ -12,8 +12,5 @@ public interface DataSource<T> {
     void update(T item);
     void update(List<T> items);
     void remove(T item);
-    void removeAll();
-    T fetch(long id);
-    List<T> fetchAll();
     boolean hasData();
 }

@@ -13,7 +13,7 @@ import com.github.gfx.android.orma.annotation.Table;
 @Table
 public class Todo {
 
-    @PrimaryKey(autoincrement = false)
+    @PrimaryKey(autoincrement = true)
     public long id;
 
     @Column(indexed = true)
@@ -23,6 +23,16 @@ public class Todo {
     @Nullable // allows NULL (default: NOT NULL)
     public String content;
 
-    @Column
-    public long createdTimeMillis;
+    @Column(indexed = true)
+    public boolean done;
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", done=" + done +
+                '}';
+    }
 }

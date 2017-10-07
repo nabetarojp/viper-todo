@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.cookpad.android.licensetools'
-apply plugin: 'com.github.gfx.ribbonizer'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
@@ -25,6 +24,10 @@ android {
     }
     dexOptions {
         dexInProcess = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -58,17 +61,6 @@ dependencies {
     compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
     compile 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
 
-    // Network
-    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-    compile ("com.squareup.retrofit2:converter-simplexml:2.3.0") {
-        exclude group: 'xpp3', module: 'xpp3'
-        exclude group: 'stax', module: 'stax-api'
-        exclude group: 'stax', module: 'stax'
-    }
-
     // Data
     compile("com.github.gfx.android.orma:orma:$ormaVersion") {
         exclude group: 'io.reactivex.rxjava2', module: 'rxjava'
@@ -80,6 +72,7 @@ dependencies {
     // Util
     compile "com.google.code.gson:gson:$gsonVersion"
 
+    compile 'com.annimon:stream:1.1.9'
     compile 'com.jakewharton.timber:timber:4.5.1'
     compile 'com.android.support:multidex:1.0.1'
 }

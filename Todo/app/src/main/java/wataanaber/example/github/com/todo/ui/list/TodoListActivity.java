@@ -6,12 +6,18 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+
+import com.annimon.stream.Stream;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 import wataanaber.example.github.com.todo.R;
+import wataanaber.example.github.com.todo.data.model.Todo;
 import wataanaber.example.github.com.todo.databinding.ActivityTodoListBinding;
 
 public class TodoListActivity extends AppCompatActivity implements TodoListContract.View {
@@ -29,6 +35,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
         super.onCreate(savedInstanceState);
         AndroidInjection.inject(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_todo_list);
+        binding.setView(this);
 
         binding.toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(binding.toolbar);
@@ -39,6 +46,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+        presenter.fetchTodos();
     }
 
     @Override
@@ -52,5 +60,31 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
         binding.progressBar.setVisibility(View.GONE);
         binding.errorText.setVisibility(View.VISIBLE);
         binding.errorText.setText(message);
+    }
+
+    @Override
+    public void showTodos(List<Todo> todos) {
+        binding.errorText.setVisibility(View.GONE);
+        Stream.of(todos).forEach(todo -> Log.d("", todo.toString()));
+    }
+
+    @Override
+    public void showProgressBar() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        binding.progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmpty() {
+        binding.errorText.setText("Todo is empty.");
+        binding.errorText.setVisibility(View.VISIBLE);
+    }
+
+    public void onClickCreate(View view) {
+        presenter.openCreateTodo();
     }
 }

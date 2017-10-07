@@ -37,7 +37,7 @@ public class SplashPresenter implements SplashContract.Presenter, SplashContract
     }
 
     @Override
-    public void onError(Throwable t) {
-        view.showError(t.getMessage() != null ? t.getMessage() : "error");
+    public void openTodoList() {
+        router.openTodoList(activity);
     }
 }
