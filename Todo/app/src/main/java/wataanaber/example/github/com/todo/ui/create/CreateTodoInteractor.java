@@ -34,7 +34,7 @@ public class CreateTodoInteractor implements CreateTodoContract.Interactor {
 
     @Override
     public void saveTodo(Todo todo) {
-        repository.todoLocalDataSource.add(todo);
+        repository.localTodoData().add(todo);
         out.onSave();
     }
 }

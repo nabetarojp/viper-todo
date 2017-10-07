@@ -19,14 +19,14 @@ import wataanaber.example.github.com.todo.data.model.Todo;
  * Created by watanabe on 2017/10/02.
  */
 
-public class TodoLocalDataSource implements TodoDataSource {
+public class LocalTodoDataSource implements TodoDataSource {
 
-    private static final String TAG = "TodoLocalDataSource";
+    private static final String TAG = "LocalTodoDataSource";
 
     private OrmaDatabase ormaDatabase;
 
     @Inject
-    public TodoLocalDataSource(OrmaDatabase ormaDatabase) {
+    public LocalTodoDataSource(OrmaDatabase ormaDatabase) {
         this.ormaDatabase = ormaDatabase;
     }
 
@@ -71,7 +71,7 @@ public class TodoLocalDataSource implements TodoDataSource {
     }
 
     @Override
-    public boolean hasData() {
-        return !ormaDatabase.relationOfTodo().isEmpty();
+    public boolean isEmpty() {
+        return ormaDatabase.relationOfTodo().isEmpty();
     }
 }

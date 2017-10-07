@@ -12,5 +12,5 @@ public interface DataSource<T> {
     void update(T item);
     void update(List<T> items);
     void remove(T item);
-    boolean hasData();
+    boolean isEmpty();
 }

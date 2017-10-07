@@ -13,7 +13,6 @@ import wataanaber.example.github.com.todo.data.repository.DataSource;
  */
 
 public interface TodoDataSource extends DataSource<Todo> {
-
     Observable<Todo> fetchAsObservable(long id);
     Single<List<Todo>> fetchAllAsSingle();
 }

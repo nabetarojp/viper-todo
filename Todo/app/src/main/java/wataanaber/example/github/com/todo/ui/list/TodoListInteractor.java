@@ -35,8 +35,8 @@ public class TodoListInteractor implements TodoListContract.Interactor {
 
     @Override
     public void fetchTodos() {
-        if (repository.todoLocalDataSource.hasData()) {
-            disposables = repository.todoLocalDataSource.fetchAllAsSingle()
+        if (!repository.localTodoData().isEmpty()) {
+            disposables = repository.localTodoData().fetchAllAsSingle()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(todos -> out.onFetchTodo(true, todos));
