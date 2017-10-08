@@ -47,6 +47,11 @@ public class TodoListPresenter implements TodoListContract.Presenter, TodoListCo
     }
 
     @Override
+    public void openEditTodo(Todo todo) {
+        router.openEditTodo(activity);
+    }
+
+    @Override
     public void openCreateTodo() {
         router.openCreateTodo(activity);
     }

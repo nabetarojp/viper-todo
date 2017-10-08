@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="view"
-            type="wataanaber.example.github.com.todo.ui.list.TodoListActivity"/>
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -22,6 +16,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                style="@style/ToolbarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/app_name" />
@@ -34,18 +29,15 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/app_bar">
 
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/create_button"
-                android:layout_width="wrap_content"
-                android:onClick="@{view.onClickCreate}"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/error_text"

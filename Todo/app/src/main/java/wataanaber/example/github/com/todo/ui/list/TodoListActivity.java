@@ -6,6 +6,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 
@@ -25,6 +27,8 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
     @Inject
     TodoListContract.Presenter presenter;
     ActivityTodoListBinding binding;
+    TodoAdapter adapter;
+    LinearLayoutManager layoutManager;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, TodoListActivity.class);
@@ -40,6 +44,7 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
         binding.toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(binding.toolbar);
 
+        initRecyclerView();
     }
 
     @Override
@@ -64,8 +69,13 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
 
     @Override
     public void showTodos(List<Todo> todos) {
+        if (adapter == null) {
+            adapter = new TodoAdapter(this, todos, presenter);
+            binding.recyclerView.setAdapter(adapter);
+        }
         binding.errorText.setVisibility(View.GONE);
         Stream.of(todos).forEach(todo -> Log.d("", todo.toString()));
+
     }
 
     @Override
@@ -82,6 +92,15 @@ public class TodoListActivity extends AppCompatActivity implements TodoListContr
     public void showEmpty() {
         binding.errorText.setText("Todo is empty.");
         binding.errorText.setVisibility(View.VISIBLE);
+    }
+
+    private void initRecyclerView() {
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.recyclerView.setLayoutManager(layoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
+        binding.recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
     public void onClickCreate(View view) {

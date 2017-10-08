@@ -22,6 +22,7 @@ public interface TodoListContract {
 
         void fetchTodos();
 
+        void openEditTodo(Todo todo);
         void openCreateTodo();
     }
 
